@@ -16,7 +16,6 @@ import toolgood.words.internals.BaseSearchEx;
  * 我未来可能以敏感词过滤做为创业项目，所以这是最后的开源版本，不再免费补bug了。
  * IllegalWordsSearch修复了2020-10-8日前所有bug。
  */
-@Deprecated
 public class IllegalWordsSearch extends BaseSearchEx {
     public class SkipWordFilterHandler {
         public char c;

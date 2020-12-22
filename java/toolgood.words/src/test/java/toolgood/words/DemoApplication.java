@@ -20,43 +20,44 @@ import org.springframework.util.StopWatch;
 public class DemoApplication {
 
 	public static void main(String[] args) throws Exception {
-		
-		test_StringSearch();
-		test_WordsSearch();
 
-		test_StringSearchEx();
-		test_WordsSearchEx();
+//		test_StringSearch();
+//		test_WordsSearch();
+//
+//		test_StringSearchEx();
+//		test_WordsSearchEx();
+//
+//		test_StringSearchEx2();
+//		test_WordsSearchEx2();
+//		test_IllegalWordsSearch();
+//
+//		test_StringMatch();
+//		test_WordsMatch();
+//
+//		test_StringMatchEx();
+//		test_WordsMatchEx();
+//
+//		test_PinyinMatch();
+//		test_PinyinMatch2();
+//
+//		test_Pinyin();
+//		test_words();
 
-		test_StringSearchEx2();
-		test_WordsSearchEx2();
-		test_IllegalWordsSearch();
-
-		test_StringMatch();
-		test_WordsMatch();
-
-		test_StringMatchEx();
-		test_WordsMatchEx();
-
-		test_PinyinMatch();
-		test_PinyinMatch2();
-
-		test_Pinyin();
-		test_words();
-
-		// try {
-		// 	test_save_load();
-		// 	test_IllegalWordsSearch_loadWordsFormBinaryFile();
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// }
+		try {
+//			test_save_load();
+			test_IllegalWordsSearch2_saveToBinaryFile();
+//			test_IllegalWordsSearch_loadWordsFormBinaryFile();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// test_times();
-
-		test_issues_54();
-		test_issues_57();
-		test_issues_57_2();
-		test_issues_57_3();
-		test_issues_65();
-		test_issues_74();
+//
+//		test_issues_54();
+//		test_issues_57();
+//		test_issues_57_2();
+//		test_issues_57_3();
+//		test_issues_65();
+//		test_issues_74();
 	}
 
 	private static void test_StringSearch() {
@@ -907,7 +908,8 @@ public class DemoApplication {
 			System.out.println("IllegalWordsSearch Replace is Error.");
 		}
 	}
-	public static void test_issues_57(){
+
+	public static void test_issues_57() {
 		String test = "一,二二,三三三,四四四四,五五五五五,六六六六六六";
 		List<String> list = new ArrayList<String>();
 		list.add("一");
@@ -952,8 +954,8 @@ public class DemoApplication {
 		}
 	}
 
-	public static void test_issues_57_2(){
-        String test = "jameson吃饭";
+	public static void test_issues_57_2() {
+		String test = "jameson吃饭";
 		List<String> list = new ArrayList<String>();
 		list.add("jameson吃饭");
 		list.add("吃饭jameson");
@@ -972,76 +974,98 @@ public class DemoApplication {
 			System.out.println("FindFirst is Error.");
 		}
 	}
-	public static void test_issues_57_3(){
+
+	public static void test_issues_57_3() {
 		String test = "his is sha ash";
-        List<String> list = new ArrayList<String>();
-        list.add("ash");
-        list.add("sha");
-        list.add("bcd");
-        System.out.println("test_issues_57_3 run Test.");
-
-        IllegalWordsSearch iwords = new IllegalWordsSearch();
-        iwords.SetKeywords(list);
-
-        boolean b = iwords.ContainsAny(test);
-        if (b == false) {
-            System.out.println("ContainsAny is Error.");
-        }
-
-        IllegalWordsSearchResult f = iwords.FindFirst(test);
-        if (f == null || f.Keyword.equals("sha") == false) {
-            System.out.println("FindFirst is Error.");
-        }
-	}
-	public static void test_issues_65(){
-		String test = "fFuck";
-        List<String> list = new ArrayList<String>();
-        list.add("fuck");
-        list.add("ffx");
-        list.add("bcd");
-        System.out.println("test_issues_65 run Test.");
-
-        IllegalWordsSearch iwords = new IllegalWordsSearch();
-        iwords.SetKeywords(list);
-
-        boolean b = iwords.ContainsAny(test);
-        if (b == false) {
-            System.out.println("ContainsAny is Error.");
-        }
-
-        String f = iwords.Replace(test);
-        if (f == null || f.equals("*****") == false) {
-            System.out.println("Replace is Error.");
-        }
-	}
-
-	public static void test_issues_74(){
-        List<String> list =loadKeywords(new File("sensi_words.txt"));
-        System.out.println("test_issues_74 run Test.");
+		List<String> list = new ArrayList<String>();
+		list.add("ash");
+		list.add("sha");
+		list.add("bcd");
+		System.out.println("test_issues_57_3 run Test.");
 
 		IllegalWordsSearch iwords = new IllegalWordsSearch();
-        iwords.SetKeywords(list);
+		iwords.SetKeywords(list);
+
+		boolean b = iwords.ContainsAny(test);
+		if (b == false) {
+			System.out.println("ContainsAny is Error.");
+		}
+
+		IllegalWordsSearchResult f = iwords.FindFirst(test);
+		if (f == null || f.Keyword.equals("sha") == false) {
+			System.out.println("FindFirst is Error.");
+		}
+	}
+
+	public static void test_issues_65() {
+		String test = "fFuck";
+		List<String> list = new ArrayList<String>();
+		list.add("fuck");
+		list.add("ffx");
+		list.add("bcd");
+		System.out.println("test_issues_65 run Test.");
+
+		IllegalWordsSearch iwords = new IllegalWordsSearch();
+		iwords.SetKeywords(list);
+
+		boolean b = iwords.ContainsAny(test);
+		if (b == false) {
+			System.out.println("ContainsAny is Error.");
+		}
+
+		String f = iwords.Replace(test);
+		if (f == null || f.equals("*****") == false) {
+			System.out.println("Replace is Error.");
+		}
+	}
+
+	public static void test_issues_74() {
+		List<String> list = loadKeywords(new File("sensi_words.txt"));
+		System.out.println("test_issues_74 run Test.");
+
+		IllegalWordsSearch iwords = new IllegalWordsSearch();
+		iwords.SetKeywords(list);
 		String test = "机机歪歪";
 
 		boolean b = iwords.ContainsAny(test);
-		if (b==false) {
-            System.out.println("ContainsAny is Error.");
+		if (b == false) {
+			System.out.println("ContainsAny is Error.");
 		}
 	}
-	
-	public static List<String> loadKeywords(File file){
-		List<String> keyArray=new ArrayList<String>();
-		try{
-			BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
+
+	public static List<String> loadKeywords(File file) {
+		List<String> keyArray = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));// 构造一个BufferedReader类来读取文件
 			String s = null;
-			while((s = br.readLine())!=null){//使用readLine方法，一次读一行
+			while ((s = br.readLine()) != null) {// 使用readLine方法，一次读一行
 				keyArray.add(s);
 			}
 			br.close();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return keyArray;
-    }
+	}
 
+	private static void test_IllegalWordsSearch2_saveToBinaryFile() throws IOException {
+		List<String> list = new ArrayList<>();
+		try (BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(new ClassPathResource("sensi_words.txt").getInputStream()))) {
+			for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+				list.add(line);
+			}
+		}
+		IllegalWordsSearch search = new IllegalWordsSearch();
+		search.SetKeywords(list);
+		
+		String test = "我是胡锦涛哈哈机机歪歪";
+		System.out.println(test);
+		boolean b = search.ContainsAny(test);
+		if (b == false) {
+			System.out.println("ContainsAny is Error.");
+		}
+		String str = search.Replace(test, '*');
+		System.out.println(str);
+	}
 }
